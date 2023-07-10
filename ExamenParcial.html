@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario con Validaciones</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#FormularioPrueba').submit(function(e) {
+        e.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+        // Realiza las validaciones
+        var nombre = $('#nombre').val();
+        var apellido = $('#apellido').val();
+        var email = $('#correo').val(); 
+        var genero = $('#genero').val();
+        var FechNac = $('#FechNac').val();
+        
+        // Verifica que los campos no estén vacíos
+        if (nombre === '' || apellido === '' || email === '' || genero === '' || FechNac === '') {
+          alert('Por favor, completa todos los campos.');
+          return;
+        }
+
+        // Verifica el formato del email utilizando una expresión regular
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Por favor, ingresa un email válido.');
+          return;
+        }
+
+         // Muestra una alerta de confirmación antes de enviar el formulario
+        var confirmation = confirm('¿Estás seguro de enviar el formulario?');
+        if (confirmation) {
+          // Si el usuario confirma, se puede enviar el formulario
+          alert('Formulario enviado exitosamente.');
+          limpiaCampo();
+
+        } else {
+          // Si el usuario cancela, no se envía el formulario
+          alert('Envío de formulario cancelado.');
+        }
+        function limpiaCampo() {
+        //Utilizamos el elemento al que vamos a limpiar el campo        .
+          document.getElementById("nombre").value = "";
+          document.getElementById("apellido").value = "";
+          document.getElementById("correo").value = "";
+          document.getElementById("genero").value = "";
+          document.getElementById("FechNac").value = "";
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row align-items-center">
+         <h1>Formulario con Validaciones</h1>
+        </div>
+    </div>
+  <form id="FormularioPrueba" style="margin: auto;">
+    <div class="container">
+    <div class="row align-items-center">
+         
+                <div class="form-group col-md-6">
+                    <label for="inputname">Nombre:</label>
+                    <input type="text" id="nombre" class="form-control"  required><br>
+                </div>  
+                <div class="form-group col-md-6">
+                    <label for="inputname">Apellido:</label>
+                    <input type="text" id="apellido"  class="form-control" required><br>
+                </div>
+           
+    </div>
+    <div class="row align-items-center">
+            
+                <div class="form-group col-md-6">
+                    <label for="InputEmail">Email:</label>
+                    <input type="email" id="correo" class="form-control" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="genero">Género:</label>
+                    <input type="text" id="genero" class="form-control" required><br>
+                </div>
+           
+    </div>    
+                <div class="form-group">
+                    <label for="FechNac">Fecha de Nacimiento:</label>
+                    <input type="date" id="FechNac" required><br>       
+                </div>
+            <input type="submit" value="Enviar">
+    
+    </div>
+  </form>
+</body>
+</html>
